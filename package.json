@@ -1,0 +1,15 @@
+{
+    "name": "crdb-k8s",
+    "version": "0.0.1",
+    "description": "crdb-cert-rotation",
+    "keywords": [
+        "CRDB"
+    ],
+    "main": "index.mjs",
+    "scripts": {
+        "start": "node ."
+    },
+    "dependencies": {
+        "ws": "latest"
+    }
+}
