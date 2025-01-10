@@ -2,7 +2,7 @@
 <style>
     .pageTitle {
         color: #550077;
-        font-size: 1.25em;
+        font-size: 1.5em;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
@@ -47,14 +47,14 @@
         white-space: nowrap;
     }
 
-    .passedEquality {
+    .resultOK {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         padding: 0.5em;
         white-space: nowrap;
         color: #008800;
     }
 
-    .failedEquality {
+    .resultWarning {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         padding: 0.5em;
         white-space: nowrap;
@@ -70,10 +70,30 @@
         background: #eeeeee;
         border-radius: 0.5em;
     }
+
+    .fragHeader {
+        color: #0000aa;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 0.9em;
+        font-weight: bolder;
+    }
+
+    .fragLight {
+        color: #777777;
+        font-family: monospace;
+        font-size: 0.8em;
+    }
+
+    .fragHeavy {
+        color: #553399;
+        font-family: monospace;
+        font-size: 0.8em;
+        font-weight: bolder;
+    }
 </style>
 
 <body>
-    <h2 class="pageTitle">Platform Health Check Summary</h3>
+    <h1 class="pageTitle">Platform Health Check Summary</h1>
     <table style="border-collapse: collapse; padding: 1em;">
         <% for(const headerEntry of HeaderList) { %>
         <tr>
@@ -100,10 +120,10 @@
             <td class="tContent">
                 <pre class="preContent"><%- objectEntry.Results.Value.join('<br>') %></pre>
             </td>
-            <% if(objectEntry.Results.FailedEquality) { %>
-            <td class="tContent failedEquality">Inconsistent</td>
+            <% if(objectEntry.Results.Warning) { %>
+            <td class="tContent resultWarning"><%- objectEntry.Results.Comments %></td>
             <% } else { %>
-            <td class="tContent passedEquality">Good</td>
+            <td class="tContent resultOK"><%- objectEntry.Results.Comments %></td>
             <% }; %>
         </tr>
         <% }; %>

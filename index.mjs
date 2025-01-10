@@ -215,7 +215,8 @@ function DeepEqual(x, y) {
 
 function PassAsIs(myArrayObj) {
     return {
-        Value: myArrayObj
+        Value: myArrayObj,
+        Comments: 'Good'
     };
 };
 
@@ -227,13 +228,15 @@ function ValidateIdentical(myArrayObj) {
             const rightObj = myArrayObj[rightIndex];
             if (!DeepEqual(leftObj, rightObj)) {
                 return {
-                    FailedEquality: true,
+                    Warning: true,
+                    Comments: 'Not consistent',
                     Value: myArrayObj
                 };
             };
         };
     };
     return {
+        Comments: 'Good',
         Value: [myArrayObj[0]]
     };
 };
@@ -337,16 +340,44 @@ for (const CRDBPodObj of AllPods.CRDB) {
             };
             DFBlock++;
         };
-        FreeSpace.push(DFInfo)
+
+        if (DFInfo.DFEntries.length > 0) {
+            if (DFInfo.DFEntries[0].startsWith('Filesystem ')) {
+                FreeSpace.push(DFInfo);
+            };
+        };
     };
 };
 
+const FreeSpacePretty = FreeSpace.map(item => {
+    const HTML = [];
+    HTML.push(`<span class=\"fragHeader\">${item.CRDBPodName}</span>`);
+    for (const DFItem of item.DFEntries) {
+        if (DFItem.startsWith('/dev/') && !DFItem.endsWith('/etc/hosts')) {
+            HTML.push(`<span style=\"padding-left: 1em\" class=\"fragHeavy\">${DFItem}</span>`);
+        } else {
+            HTML.push(`<span style=\"padding-left: 1em\" class=\"fragLight\">${DFItem}</span>`);
+        };
+    };
+    return HTML.join('<br>');
+});
 
+ObjectList.push({
+    Header: 'Actual Capacity',
+    Results: PassAsIs(FreeSpacePretty)
+});
+
+
+
+const nonCRDBPodsPretty = AllPods.NonCRDB.map(item => {
+    return `<span style=\"padding-left: 1em\" class=\"fragLight\">${item.metadata.name}</span>`;
+});
 
 ObjectList.push({
     Header: 'Non-CRDB Pods',
-    Results: PassAsIs(AllPods.NonCRDB.map(podDeets => podDeets.metadata.name))
+    Results: PassAsIs(nonCRDBPodsPretty)
 });
+
 
 
 
