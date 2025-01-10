@@ -1,0 +1,258 @@
+<html>
+<style>
+    .pageTitle {
+        color: #550077;
+        font-size: 1.25em;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .tRowsHeader {
+        border-bottom: 1px solid lightgray;
+        background: #eeeeee;
+    }
+
+    .tRows {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .pageHeadersLeft {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em;
+        white-space: nowrap;
+        color: #550077;
+        font-size: 1em;
+    }
+
+    .pageHeadersRight {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em 0 0.2em 2em;
+        white-space: nowrap;
+        color: #333333;
+        font-size: 0.8em;
+    }
+
+    .tHeaders {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #550077;
+    }
+
+    .tContent {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+    }
+
+    .passedEquality {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #008800;
+    }
+
+    .failedEquality {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #990000;
+    }
+
+    .leftSpacer {
+        background: #eeeeee;
+    }
+
+    .preContent {
+        padding: 0.5em;
+        background: #eeeeee;
+        border-radius: 0.5em;
+    }
+</style>
+
+<body>
+    <h2 class="pageTitle">Platform Health Check Summary</h3>
+    <table style="border-collapse: collapse; padding: 1em;">
+        
+        <tr>
+            <td class="pageHeadersLeft">RoachDiag Run date</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">Tue Sep 24 20:32:10 UTC 2024</td>
+        </tr>
+        
+        <tr>
+            <td class="pageHeadersLeft">Path to diagnostics files</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">/Users/markzlamal/Documents/PlatformHealthCheck/HPE</td>
+        </tr>
+        
+        <tr>
+            <td class="pageHeadersLeft">Kubernetes namespace &amp; context</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">cluster-uswest4</td>
+        </tr>
+        
+    </table>
+    <br>
+    <br>
+    <table style="border-collapse: collapse; padding: 1em;">
+        <tr class="tRowsHeader">
+            <th class="tHeaders">&nbsp;</th>
+            <th class="tHeaders">Category</th>
+            <th class="tHeaders">Observation</th>
+            <th class="tHeaders">Status</th>
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Provider</td>
+            <td class="tContent">
+                <pre class="preContent">aws:///us-west-2a/i-0b20669451426cb07<br>aws:///us-west-2a/i-0cc831106ffc2e848<br>aws:///us-west-2b/i-0c1d6ea1f92a80bf2<br>aws:///us-west-2b/i-031c7096d6f4906e8<br>aws:///us-west-2b/i-03221b284c03036d8<br>aws:///us-west-2c/i-07b50f11b662cceb2<br>aws:///us-west-2c/i-089cfdc49ad6ec26f<br>aws:///us-west-2c/i-0964bdc96f4d12a0c</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">OS</td>
+            <td class="tContent">
+                <pre class="preContent">linux (Ubuntu 20.04.6 LTS)</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Kernel Versions</td>
+            <td class="tContent">
+                <pre class="preContent">5.15.0-1040-aws</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Kubelet Version</td>
+            <td class="tContent">
+                <pre class="preContent">v1.29.4</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Docker Version</td>
+            <td class="tContent">
+                <pre class="preContent">containerd://1.7.15</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Worker Nodes</td>
+            <td class="tContent">
+                <pre class="preContent">m6i.2xlarge</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Pods</td>
+            <td class="tContent">
+                <pre class="preContent">cockroachdb-client-secure-79c48dfc9c-bnxv2<br>cockroachdb-full-backup-job-28782720-p2lkj<br>cockroachdb-full-backup-job-28784160-v65rv<br>cockroachdb-full-backup-job-28785600-mt6jz<br>cockroachdb-incremental-backup-job-28786680-4spr9<br>cockroachdb-incremental-backup-job-28786740-l4xz9<br>cockroachdb-incremental-backup-job-28786800-hvcmv<br>croach-cockroachdb-0<br>croach-cockroachdb-1<br>croach-cockroachdb-2<br>croach-cockroachdb-3<br>croach-cockroachdb-4<br>croach-cockroachdb-5</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Versions</td>
+            <td class="tContent">
+                <pre class="preContent">cockroachdb/cockroach:v23.1.24<br>cockroachdb/cockroach:v23.1.24<br>cockroachdb/cockroach:v23.1.24<br>cockroachdb/cockroach:v23.1.24<br>cockroachdb/cockroach:v23.1.24<br>cockroachdb/cockroach:v23.1.24<br>cockroachdb/cockroach:v23.1.24<br>192111006018.dkr.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24<br>192111006018.dkr.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24<br>192111006018.dkr.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24<br>192111006018.dkr.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24<br>192111006018.dkr.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24<br>192111006018.dkr.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</pre>
+            </td>
+            
+            <td class="tContent failedEquality">Inconsistent</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Capacity</td>
+            <td class="tContent">
+                <pre class="preContent">150Gi</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Storage Class</td>
+            <td class="tContent">
+                <pre class="preContent">crdb-storage</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Driver</td>
+            <td class="tContent">
+                <pre class="preContent">ebs.csi.aws.com</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume FS Type</td>
+            <td class="tContent">
+                <pre class="preContent">ext4</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Non-CRDB Pods</td>
+            <td class="tContent">
+                <pre class="preContent">croach-cockroach-operator-manager-6db8bf849-8m5g7</pre>
+            </td>
+            
+            <td class="tContent passedEquality">Good</td>
+            
+        </tr>
+        
+    </table>
+    <br>
+</body>
+
+</html>

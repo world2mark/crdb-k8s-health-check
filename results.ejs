@@ -1,0 +1,114 @@
+<html>
+<style>
+    .pageTitle {
+        color: #550077;
+        font-size: 1.25em;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .tRowsHeader {
+        border-bottom: 1px solid lightgray;
+        background: #eeeeee;
+    }
+
+    .tRows {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .pageHeadersLeft {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em;
+        white-space: nowrap;
+        color: #550077;
+        font-size: 1em;
+    }
+
+    .pageHeadersRight {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em 0 0.2em 2em;
+        white-space: nowrap;
+        color: #333333;
+        font-size: 0.8em;
+    }
+
+    .tHeaders {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #550077;
+    }
+
+    .tContent {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+    }
+
+    .passedEquality {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #008800;
+    }
+
+    .failedEquality {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #990000;
+    }
+
+    .leftSpacer {
+        background: #eeeeee;
+    }
+
+    .preContent {
+        padding: 0.5em;
+        background: #eeeeee;
+        border-radius: 0.5em;
+    }
+</style>
+
+<body>
+    <h2 class="pageTitle">Platform Health Check Summary</h3>
+    <table style="border-collapse: collapse; padding: 1em;">
+        <% for(const headerEntry of HeaderList) { %>
+        <tr>
+            <td class="pageHeadersLeft"><%- headerEntry.Key %></td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight"><%- headerEntry.Value %></td>
+        </tr>
+        <% }; %>
+    </table>
+    <br>
+    <br>
+    <table style="border-collapse: collapse; padding: 1em;">
+        <tr class="tRowsHeader">
+            <th class="tHeaders">&nbsp;</th>
+            <th class="tHeaders">Category</th>
+            <th class="tHeaders">Observation</th>
+            <th class="tHeaders">Status</th>
+        </tr>
+        <% for(const objectEntry of ObjectList) { %>
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent"><%- objectEntry.Header %></td>
+            <td class="tContent">
+                <pre class="preContent"><%- objectEntry.Results.Value.join('<br>') %></pre>
+            </td>
+            <% if(objectEntry.Results.FailedEquality) { %>
+            <td class="tContent failedEquality">Inconsistent</td>
+            <% } else { %>
+            <td class="tContent passedEquality">Good</td>
+            <% }; %>
+        </tr>
+        <% }; %>
+    </table>
+    <br>
+</body>
+
+</html>
