@@ -158,7 +158,13 @@ function CaptureContainerImages(thePods) {
 
 
 function CaptureWorkerNodes(pData) {
-    return CaptureDataGeneric(pData, 'node*.yaml', ['metadata', 'labels', 'node.kubernetes.io/instance-type']);
+    const WorkerNodeList = CaptureDataGeneric(pData, 'node*.yaml', []);
+    const CleanList = WorkerNodeList.map(item => ({
+        WorkerName: item.metadata.name,
+        InstanceType: item.metadata.labels['node.kubernetes.io/instance-type']
+    }));
+    return CleanList;
+    //    return CaptureDataGeneric(pData, 'node*.yaml', ['metadata', 'labels', 'node.kubernetes.io/instance-type']);
 };
 
 
@@ -276,17 +282,91 @@ ObjectList.push({
 });
 
 
+
+
+function WorkerNodeResults(workers) {
+    const HTML = [];
+
+    let dataIsConsistent = true;
+    for (let workerNodeIndex = 0; workerNodeIndex < workers.length; workerNodeIndex++) {
+        const InstanceType = workers[workerNodeIndex].InstanceType;
+        HTML.push(`<span class=\"fragHeavy\">${InstanceType}</span><span class=\"fragLight\"> ${workers[workerNodeIndex].WorkerName}</span>`);
+        if (workers[0].InstanceType !== InstanceType) {
+            dataIsConsistent = false;
+        };
+    };
+
+    if (dataIsConsistent) {
+        return {
+            Comments: 'Good',
+            Value: HTML
+        };
+    } else {
+        return {
+            Warning: true,
+            Comments: 'Instance Type Mismatch!',
+            Value: HTML
+        };
+    };
+};
+
 const WorkerNodes = CaptureWorkerNodes(PlatformData);
+
 ObjectList.push({
     Header: 'Worker Nodes',
-    Results: ValidateIdentical(WorkerNodes)
+    Results: WorkerNodeResults(WorkerNodes)
 });
 
+
+
+
+function CRDBPodResults(pods) {
+    const usedWorkers = [];
+    const HTML = [];
+    const InconsistentWorkers = [];
+    let dataIsConsistent = true;
+
+    // round 1: capture any inconsistencies
+    for (const crdbPod of pods) {
+        if (usedWorkers.find(workerName => workerName === crdbPod.spec.nodeName)) {
+            InconsistentWorkers.push(crdbPod.spec.nodeName);
+            dataIsConsistent = false;
+        };
+        usedWorkers.push(crdbPod.spec.nodeName);
+    };
+
+    // round 2: flag the inconsistencies via HTML
+    for (const crdbPod of pods) {
+        if (InconsistentWorkers.find(nodeName => nodeName === crdbPod.spec.nodeName)) {
+            HTML.push(`<span class=\"fragRedHeavy\">${crdbPod.metadata.name}</span><span class=\"fragRedLight\"> ${crdbPod.spec.nodeName}</span>`);
+        } else {
+            HTML.push(`<span class=\"fragHeavy\">${crdbPod.metadata.name}</span><span class=\"fragLight\"> ${crdbPod.spec.nodeName}</span>`);
+        };
+    };
+
+    if (dataIsConsistent) {
+        return {
+            Comments: 'Good',
+            Value: HTML
+        };
+    } else {
+        return {
+            Warning: true,
+            Comments: 'Reused Workers!',
+            Value: HTML
+        };
+    };
+};
+
 const AllPods = CaptureAllPods(PlatformData);
+
 ObjectList.push({
     Header: 'CRDB Pods',
-    Results: PassAsIs(AllPods.CRDB.map(podDeets => podDeets.metadata.name))
+    Results: CRDBPodResults(AllPods.CRDB)
 });
+
+
+
 
 const CockroachDBVersions = CaptureContainerImages(AllPods.CRDB);
 
@@ -369,6 +449,12 @@ ObjectList.push({
 
 
 
+
+
+
+
+
+// Last item
 const nonCRDBPodsPretty = AllPods.NonCRDB.map(item => {
     return `<span style=\"padding-left: 1em\" class=\"fragLight\">${item.metadata.name}</span>`;
 });
