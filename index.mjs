@@ -95,7 +95,47 @@ function CaptureDataGeneric(pData, filePattern, xPath) {
 
 
 function CaptureEnvProviders(pData) {
-    return CaptureDataGeneric(pData, 'node*.yaml', ['spec', 'providerID']);
+    const providerIDs = [];
+    const ResultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+
+    const AllWorkers = CaptureDataGeneric(pData, 'node*.yaml', []);
+
+    // round 1: capture all workers & providers
+    for (const myWorker of AllWorkers) {
+        providerIDs.push({
+            WorkerName: myWorker.metadata.name,
+            ProviderID: myWorker.spec.providerID
+        });
+    };
+
+    // round 2: match all inconsistencies
+    for (let leftIndex = 0; leftIndex < providerIDs.length; leftIndex++) {
+        let isConsistent = true;
+        const leftProvider = providerIDs[leftIndex].ProviderID.split(':///');
+        for (let rightIndex = 0; rightIndex < providerIDs.length; rightIndex++) {
+            if (leftIndex !== rightIndex) {
+                const rightProvider = providerIDs[rightIndex].ProviderID.split(':///');
+                if (leftProvider[0] !== rightProvider[0]) {
+                    isConsistent = false;
+                    ResultObj.Warning = true;
+                    break;
+                };
+            } else {
+                ResultObj.Comments = `Good: ${leftProvider[0].toUpperCase()}`
+            };
+        };
+        if (isConsistent) {
+            ResultObj.Value.push(`<span class=\"fragHeavy\">${providerIDs[leftIndex].ProviderID}</span><span class=\"fragLight\"> ${providerIDs[leftIndex].WorkerName}</span>`);
+        } else {
+            ResultObj.Comments = 'Mismatched Providers';
+            ResultObj.Value.push(`<span class=\"fragRedHeavy\">${providerIDs[leftIndex].ProviderID}</span><span class=\"fragRedLight\"> ${providerIDs[leftIndex].WorkerName}</span>`);
+        };
+    };
+
+    return ResultObj;
 };
 
 
@@ -137,7 +177,7 @@ function CaptureAllPods(pData) {
         for (const myContainer of thePod.spec.containers) {
             if (myContainer.image.includes('cockroachdb/cockroach:')) {
                 if (thePod.spec.containers.length !== 1) {
-                    throw new Error('CockroachDB pods must have a single container driving the node!');
+                    throw new Error('CockroachDB pods must have a single container driving the node');
                 };
                 myPods.CRDB.push(thePod);
                 break;
@@ -235,7 +275,7 @@ function ValidateIdentical(myArrayObj) {
             if (!DeepEqual(leftObj, rightObj)) {
                 return {
                     Warning: true,
-                    Comments: 'Not consistent',
+                    Comments: 'Inconsistent',
                     Value: myArrayObj
                 };
             };
@@ -251,10 +291,10 @@ function ValidateIdentical(myArrayObj) {
 const ObjectList = [];
 
 
-const MyEnvProvider = CaptureEnvProviders(PlatformData);
+const MyEnvProviders = CaptureEnvProviders(PlatformData);
 ObjectList.push({
     Header: 'Provider',
-    Results: PassAsIs(MyEnvProvider)
+    Results: MyEnvProviders
 });
 
 const MyOSs = CaptureOSs(PlatformData);
@@ -304,7 +344,7 @@ function WorkerNodeResults(workers) {
     } else {
         return {
             Warning: true,
-            Comments: 'Instance Type Mismatch!',
+            Comments: 'Instance Type Mismatch',
             Value: HTML
         };
     };
@@ -352,7 +392,7 @@ function CRDBPodResults(pods) {
     } else {
         return {
             Warning: true,
-            Comments: 'Reused Workers!',
+            Comments: 'Worker nodes overloaded',
             Value: HTML
         };
     };
@@ -361,7 +401,7 @@ function CRDBPodResults(pods) {
 const AllPods = CaptureAllPods(PlatformData);
 
 ObjectList.push({
-    Header: 'CRDB Pods',
+    Header: 'CRDB Pods/Workers',
     Results: CRDBPodResults(AllPods.CRDB)
 });
 
@@ -462,6 +502,66 @@ const nonCRDBPodsPretty = AllPods.NonCRDB.map(item => {
 ObjectList.push({
     Header: 'Non-CRDB Pods',
     Results: PassAsIs(nonCRDBPodsPretty)
+});
+
+
+
+const ResourceLimits = AllPods.CRDB.map(crdbPod => {
+    const podResources = crdbPod.spec.containers[0].resources;
+
+    if (podResources.limits) {
+        const lc = podResources.limits.cpu;
+        const lm = podResources.limits.memory;
+        const rc = podResources.requests.cpu;
+        const rm = podResources.requests.memory;
+
+        const HTML = [];
+
+        HTML.push(`<span class=\"fragHeader\">${crdbPod.metadata.name}</span>`);
+        HTML.push(`<span class=\"fragLight\"> Resource limit (CPU/Memory): </span><span class=\"fragHeavy\">${lc}</span><span class=\"fragLight\"> / </span><span class=\"fragHeavy\">${lm}</span>`);
+        HTML.push(`<span class=\"fragLight\"> Resource requests (CPU/Memory): </span><span class=\"fragHeavy\">${rc}</span><span class=\"fragLight\"> / </span><span class=\"fragHeavy\">${rm}</span>`);
+        return HTML.join('<br>');
+    } else {
+        return `<span class=\"fragHeader\">${crdbPod.metadata.name}</span><br><span class=\"fragLight\"> None</span>`;
+    };
+});
+
+ObjectList.push({
+    Header: 'CRDB Resource Limits',
+    Results: PassAsIs(ResourceLimits)
+});
+
+
+
+function QoSClass() {
+    const resultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+
+    let qosTest;
+
+    for(const crdbPod of AllPods.CRDB) {
+        if(!qosTest) {
+            qosTest = crdbPod.status.qosClass;
+        };
+        if(qosTest !== crdbPod.status.qosClass) {
+            resultObj.Warning = true;
+            resultObj.Comments = 'Inconsistent'
+        };
+
+        const HTML = [];
+        HTML.push(`<span class=\"fragHeader\">${crdbPod.metadata.name}</span>`);
+        HTML.push(`<span class=\"fragHeavy\"> ${crdbPod.status.qosClass}</span>`);
+        resultObj.Value.push(HTML.join('<br>'));
+    };
+
+    return resultObj;
+};
+
+ObjectList.push({
+    Header: 'qos Class',
+    Results: QoSClass()
 });
 
 
