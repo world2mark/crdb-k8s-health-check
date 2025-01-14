@@ -192,11 +192,6 @@ function CaptureAllPods(pData) {
 };
 
 
-function CaptureContainerImages(thePods) {
-    return thePods.map(somePod => somePod.spec.containers[0].image);
-};
-
-
 function CaptureWorkerNodes(pData) {
     const WorkerNodeList = CaptureDataGeneric(pData, 'node*.yaml', []);
     const CleanList = WorkerNodeList.map(item => ({
@@ -204,7 +199,6 @@ function CaptureWorkerNodes(pData) {
         InstanceType: item.metadata.labels['node.kubernetes.io/instance-type']
     }));
     return CleanList;
-    //    return CaptureDataGeneric(pData, 'node*.yaml', ['metadata', 'labels', 'node.kubernetes.io/instance-type']);
 };
 
 
@@ -213,28 +207,6 @@ function CaptureVolumes(pData) {
     return fullPVCDetails[0].map(item => item.spec);
 };
 
-
-function CaptureCRDBVolumes(pData) {
-    const myVolumes = [];
-
-    const AllPodContainers = CaptureDataGeneric(pData, 'pod*.yaml', ['spec']);
-    for (const thePod of AllPodContainers) {
-        for (const myContainer of thePod.containers) {
-            if (myContainer.image.includes('cockroachdb/cockroach:')) {
-                const storeVolumes = thePod.volumes.filter(someVolume => someVolume.persistentVolumeClaim);
-                for (const pvcObj of storeVolumes) {
-                    myVolumes.push(pvcObj.persistentVolumeClaim.claimName);
-                };
-            };
-        };
-    };
-
-    const AllPVs = CaptureVolumes(pData);
-
-    const CRDBPVs = AllPVs.filter(pvObj => myVolumes.find(item => item === pvObj.claimRef.name));
-
-    return CRDBPVs;
-};
 
 function DeepEqual(x, y) {
     if (x === y) {
@@ -408,34 +380,101 @@ ObjectList.push({
 
 
 
-const CockroachDBVersions = CaptureContainerImages(AllPods.CRDB);
+function ValidateCRDBVersions() {
+    const ResultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+    let imageTag;
+    for (const crdbPod of AllPods.CRDB) {
+        if (!imageTag) {
+            imageTag = crdbPod.spec.containers[0].image;
+        } else if (imageTag !== crdbPod.spec.containers[0].image) {
+            ResultObj.Warning = true;
+            ResultObj.Comments = 'Mixed versions'
+        };
+        const HTML = [];
+        HTML.push(`<span class=\"fragHeader\">${crdbPod.metadata.name}</span>`);
+        HTML.push(`<span class=\"fragHeavy\">${crdbPod.spec.containers[0].image}</span> <span class=\"fragLight\"> (${crdbPod.spec.nodeName})</span>`);
+        ResultObj.Value.push(HTML.join('<br>'));
+    };
+    return ResultObj;
+};
 
 ObjectList.push({
-    Header: 'CRDB Versions',
-    Results: ValidateIdentical(CockroachDBVersions)
+    Header: 'CRDB Pod Versions',
+    Results: ValidateCRDBVersions()
 });
+
+
+
+function CaptureCRDBVolumes(pData) {
+    const AllPVs = CaptureVolumes(pData);
+
+    const myVolumes = [];
+
+    for (const thePod of AllPods.CRDB) {
+        const storeVolumes = thePod.spec.volumes.filter(someVolume => someVolume.persistentVolumeClaim);
+        for (const pvcObj of storeVolumes) {
+            const myVolume = AllPVs.find(pvObj => pvObj.claimRef.name === pvcObj.persistentVolumeClaim.claimName);
+            myVolumes.push({
+                PVCName: pvcObj.persistentVolumeClaim.claimName,
+                WorkerNode: thePod.spec.nodeName,
+                PodName: thePod.metadata.name,
+                Capacity: myVolume.capacity.storage,
+                StorageClassName: myVolume.storageClassName,
+                Driver: myVolume.csi.driver,
+                FSType: myVolume.csi.fsType
+            });
+        };
+    };
+
+    return myVolumes;
+};
+
 
 
 const CRDBVolumesRaw = CaptureCRDBVolumes(PlatformData);
 
+function ValidateVolumes() {
+    const ResultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+    let capacityValue;
+    for (const volumeObj of CRDBVolumesRaw) {
+        if (!capacityValue) {
+            capacityValue = volumeObj.Capacity;
+        } else if (capacityValue !== volumeObj.Capacity) {
+            ResultObj.Warning = true;
+            ResultObj.Comments = 'Non-uniform capacities'
+        };
+        const HTML = [];
+        HTML.push(`<span class=\"fragHeader\">${volumeObj.PodName}</span>`);
+        HTML.push(`<span class=\"fragHeavy\">${volumeObj.Capacity}</span> <span class=\"fragLight\"> (${volumeObj.WorkerNode})</span>`);
+        ResultObj.Value.push(HTML.join('<br>'));
+    };
+    return ResultObj;
+};
+
 ObjectList.push({
     Header: 'Volume Capacity',
-    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.capacity.storage))
+    Results: ValidateVolumes()
 });
 
 ObjectList.push({
     Header: 'Volume Storage Class',
-    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.storageClassName))
+    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.StorageClassName))
 });
 
 ObjectList.push({
     Header: 'Volume Driver',
-    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.csi.driver))
+    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.Driver))
 });
 
 ObjectList.push({
     Header: 'Volume FS Type',
-    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.csi.fsType))
+    Results: ValidateIdentical(CRDBVolumesRaw.map(item => item.FSType))
 });
 
 
@@ -541,11 +580,11 @@ function QoSClass() {
 
     let qosTest;
 
-    for(const crdbPod of AllPods.CRDB) {
-        if(!qosTest) {
+    for (const crdbPod of AllPods.CRDB) {
+        if (!qosTest) {
             qosTest = crdbPod.status.qosClass;
         };
-        if(qosTest !== crdbPod.status.qosClass) {
+        if (qosTest !== crdbPod.status.qosClass) {
             resultObj.Warning = true;
             resultObj.Comments = 'Inconsistent'
         };
@@ -560,9 +599,98 @@ function QoSClass() {
 };
 
 ObjectList.push({
-    Header: 'qos Class',
+    Header: 'QoS Class',
     Results: QoSClass()
 });
+
+
+
+
+
+const AntiAffinity = AllPods.CRDB.map(CRDBPod => {
+    return {
+        PodName: CRDBPod.metadata.name,
+        WorkerNode: CRDBPod.spec.nodeName,
+        AntiAffinity: CRDBPod.spec.affinity
+    };
+});
+
+function ValidateAntiAffinity() {
+    const resultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+
+    let testAff;
+
+    for (const podAff of AntiAffinity) {
+        const HTML = [];
+        HTML.push(`<span class=\"fragHeader\">${podAff.PodName}</span>`);
+        if (podAff.AntiAffinity) {
+            if (!testAff) {
+                testAff = podAff.AntiAffinity;
+            };
+            if (!DeepEqual(podAff.AntiAffinity, testAff)) {
+                resultObj.Warning = true;
+                resultObj.Comments = 'Inconsistent';
+            };
+            HTML.push(`<span class=\"fragLight\"> ${JSON.stringify(podAff.AntiAffinity.podAntiAffinity, 0, 2)}</span>`);
+        } else {
+            HTML.push(`<span class=\"fragLight\"> None</span>`);
+        };
+        resultObj.Value.push(HTML.join('<br>'));
+    };
+
+    return resultObj;
+};
+
+ObjectList.push({
+    Header: 'Anti-Affinity',
+    Results: ValidateAntiAffinity()
+});
+
+
+
+
+
+const WorkerNodesRaw = CaptureDataGeneric(PlatformData, 'node*.yaml', []);
+
+function ValidateNodeTaints() {
+    const resultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+    
+    let taintList;
+
+    for(const workerNode of WorkerNodesRaw) {
+        const HTML = [];
+
+        HTML.push(`<span class=\"fragHeader\">${workerNode.metadata.name}</span>`);
+        if (workerNode.spec.taints) {
+            if (!taintList) {
+                taintList = workerNode.spec.taints;
+            };
+            if (!DeepEqual(taintList, workerNode.spec.taints)) {
+                resultObj.Warning = true;
+                resultObj.Comments = 'Inconsistent';
+            };
+            HTML.push(`<span class=\"fragLight\"> ${JSON.stringify(workerNode.spec.taints, 0, 2)}</span>`);
+        } else {
+            HTML.push(`<span class=\"fragLight\"> None</span>`);
+        };
+        resultObj.Value.push(HTML.join('<br>'));
+    };
+
+    return resultObj;
+};
+
+ObjectList.push({
+    Header: 'Node Taints',
+    Results: ValidateNodeTaints()
+});
+
+
 
 
 
