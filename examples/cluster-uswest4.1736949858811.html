@@ -1,0 +1,615 @@
+<html>
+<style>
+    .pageTitle {
+        color: #550077;
+        font-size: 1.5em;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .tRowsHeader {
+        border-bottom: 1px solid lightgray;
+        background: #eeeeee;
+    }
+
+    .tRows {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .pageHeadersLeft {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em;
+        white-space: nowrap;
+        color: #550077;
+        font-size: 1em;
+    }
+
+    .pageHeadersRight {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em 0 0.2em 2em;
+        white-space: nowrap;
+        color: #333333;
+        font-size: 0.8em;
+    }
+
+    .tHeaders {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #550077;
+    }
+
+    .tContent {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+    }
+
+    .resultOK {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #008800;
+    }
+
+    .resultWarning {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #990000;
+    }
+
+    .leftSpacer {
+        background: #eeeeee;
+    }
+
+    .preContent {
+        padding: 0.5em;
+        background: #eeeeee;
+        border-radius: 0.5em;
+    }
+
+    .fragHeader {
+        color: #0000aa;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 0.9em;
+        font-weight: bolder;
+    }
+
+    .fragLight {
+        color: #777777;
+        font-family: monospace;
+        font-size: 0.8em;
+    }
+
+    .fragHeavy {
+        color: #553399;
+        font-family: monospace;
+        font-size: 0.8em;
+        font-weight: bolder;
+    }
+
+    .fragRedHeavy {
+        color: #cc0000;
+        font-family: monospace;
+        font-size: 0.8em;
+        font-weight: bolder;
+    }
+
+    .fragRedLight {
+        color: #cc0000;
+        font-family: monospace;
+        font-size: 0.8em;
+    }
+</style>
+
+<body>
+    <h1 class="pageTitle">Platform Health Check Summary</h1>
+    <table style="border-collapse: collapse; padding: 1em;">
+        
+        <tr>
+            <td class="pageHeadersLeft">RoachDiag Run date</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">Tue Sep 24 20:32:10 UTC 2024</td>
+        </tr>
+        
+        <tr>
+            <td class="pageHeadersLeft">Path to diagnostics files</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">/Users/markzlamal/Documents/PlatformHealthCheck/HPE</td>
+        </tr>
+        
+        <tr>
+            <td class="pageHeadersLeft">Kubernetes namespace &amp; context</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">cluster-uswest4</td>
+        </tr>
+        
+    </table>
+    <br>
+    <br>
+    <table style="border-collapse: collapse; padding: 1em;">
+        <tr class="tRowsHeader">
+            <th class="tHeaders">&nbsp;</th>
+            <th class="tHeaders">Category</th>
+            <th class="tHeaders">Observation</th>
+            <th class="tHeaders">Status</th>
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Provider</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeavy">aws:///us-west-2a/i-0b20669451426cb07</span><span class="fragLight"> ip-10-150-44-67.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2a/i-0cc831106ffc2e848</span><span class="fragLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2b/i-0c1d6ea1f92a80bf2</span><span class="fragLight"> ip-10-150-52-44.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2b/i-031c7096d6f4906e8</span><span class="fragLight"> ip-10-150-55-9.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2b/i-03221b284c03036d8</span><span class="fragLight"> ip-10-150-62-44.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2c/i-07b50f11b662cceb2</span><span class="fragLight"> ip-10-150-73-110.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2c/i-089cfdc49ad6ec26f</span><span class="fragLight"> ip-10-150-94-105.us-west-2.compute.internal</span><br><span class="fragHeavy">aws:///us-west-2c/i-0964bdc96f4d12a0c</span><span class="fragLight"> ip-10-150-97-47.us-west-2.compute.internal</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good: AWS</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">OS</td>
+            <td class="tContent">
+                <pre class="preContent">linux (Ubuntu 20.04.6 LTS)</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Kernel Versions</td>
+            <td class="tContent">
+                <pre class="preContent">5.15.0-1040-aws</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Kubelet Version</td>
+            <td class="tContent">
+                <pre class="preContent">v1.29.4</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Docker Version</td>
+            <td class="tContent">
+                <pre class="preContent">containerd://1.7.15</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Worker Nodes</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-44-67.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-52-44.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-55-9.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-62-44.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-73-110.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-94-105.us-west-2.compute.internal</span><br><span class="fragHeavy">m6i.2xlarge</span><span class="fragLight"> ip-10-150-97-47.us-west-2.compute.internal</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Pods/Workers</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeavy">cockroachdb-client-secure-79c48dfc9c-bnxv2</span><span class="fragLight"> ip-10-150-52-44.us-west-2.compute.internal</span><br><span class="fragRedHeavy">cockroachdb-full-backup-job-28782720-p2lkj</span><span class="fragRedLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragRedHeavy">cockroachdb-full-backup-job-28784160-v65rv</span><span class="fragRedLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragRedHeavy">cockroachdb-full-backup-job-28785600-mt6jz</span><span class="fragRedLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragRedHeavy">cockroachdb-incremental-backup-job-28786680-4spr9</span><span class="fragRedLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragRedHeavy">cockroachdb-incremental-backup-job-28786740-l4xz9</span><span class="fragRedLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragRedHeavy">cockroachdb-incremental-backup-job-28786800-hvcmv</span><span class="fragRedLight"> ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragHeavy">crdbdemo-cockroachdb-0</span><span class="fragLight"> ip-10-150-73-110.us-west-2.compute.internal</span><br><span class="fragHeavy">crdbdemo-cockroachdb-1</span><span class="fragLight"> ip-10-150-44-67.us-west-2.compute.internal</span><br><span class="fragHeavy">crdbdemo-cockroachdb-2</span><span class="fragLight"> ip-10-150-62-44.us-west-2.compute.internal</span><br><span class="fragHeavy">crdbdemo-cockroachdb-3</span><span class="fragLight"> ip-10-150-94-105.us-west-2.compute.internal</span><br><span class="fragHeavy">crdbdemo-cockroachdb-4</span><span class="fragLight"> ip-10-150-97-47.us-west-2.compute.internal</span><br><span class="fragHeavy">crdbdemo-cockroachdb-5</span><span class="fragLight"> ip-10-150-55-9.us-west-2.compute.internal</span></pre>
+            </td>
+            
+            <td class="tContent resultWarning">Worker nodes overloaded</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Pod Versions</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">cockroachdb-client-secure-79c48dfc9c-bnxv2</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-52-44.us-west-2.compute.internal)</span><br><span class="fragHeader">cockroachdb-full-backup-job-28782720-p2lkj</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-45-112.us-west-2.compute.internal)</span><br><span class="fragHeader">cockroachdb-full-backup-job-28784160-v65rv</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-45-112.us-west-2.compute.internal)</span><br><span class="fragHeader">cockroachdb-full-backup-job-28785600-mt6jz</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-45-112.us-west-2.compute.internal)</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786680-4spr9</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-45-112.us-west-2.compute.internal)</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786740-l4xz9</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-45-112.us-west-2.compute.internal)</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786800-hvcmv</span><br><span class="fragHeavy">cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-45-112.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-0</span><br><span class="fragHeavy">4456234.mz.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-73-110.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-1</span><br><span class="fragHeavy">4456234.mz.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-44-67.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-2</span><br><span class="fragHeavy">4456234.mz.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-62-44.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-3</span><br><span class="fragHeavy">4456234.mz.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-94-105.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-4</span><br><span class="fragHeavy">4456234.mz.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-97-47.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-5</span><br><span class="fragHeavy">4456234.mz.ecr.us-west-2.amazonaws.com/cnx/public-images/cockroachdb/cockroach:v23.1.24</span> <span class="fragLight"> (ip-10-150-55-9.us-west-2.compute.internal)</span></pre>
+            </td>
+            
+            <td class="tContent resultWarning">Mixed versions</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Capacity</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">crdbdemo-cockroachdb-0</span><br><span class="fragHeavy">150Gi</span> <span class="fragLight"> (ip-10-150-73-110.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-1</span><br><span class="fragHeavy">150Gi</span> <span class="fragLight"> (ip-10-150-44-67.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-2</span><br><span class="fragHeavy">150Gi</span> <span class="fragLight"> (ip-10-150-62-44.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-3</span><br><span class="fragHeavy">150Gi</span> <span class="fragLight"> (ip-10-150-94-105.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-4</span><br><span class="fragHeavy">150Gi</span> <span class="fragLight"> (ip-10-150-97-47.us-west-2.compute.internal)</span><br><span class="fragHeader">crdbdemo-cockroachdb-5</span><br><span class="fragHeavy">150Gi</span> <span class="fragLight"> (ip-10-150-55-9.us-west-2.compute.internal)</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Storage Class</td>
+            <td class="tContent">
+                <pre class="preContent">crdb-storage</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Driver</td>
+            <td class="tContent">
+                <pre class="preContent">ebs.csi.aws.com</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume FS Type</td>
+            <td class="tContent">
+                <pre class="preContent">ext4</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Actual Capacity</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">cockroachdb-client-secure-79c48dfc9c-bnxv2</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.9G   43G  13% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           512M   12K  512M   1% /cockroach/cockroach-certs</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.9G   43G  13% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           512M   12K  512M   1% /run/secrets/kubernetes.io/serviceaccount</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span><br><span class="fragHeader">crdbdemo-cockroachdb-0</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.9G   43G  13% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    148G  5.2G  143G   4% /cockroach/cockroach-data</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.9G   43G  13% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span><br><span class="fragHeader">crdbdemo-cockroachdb-1</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.9G   43G  13% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    148G  5.5G  143G   4% /cockroach/cockroach-data</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.9G   43G  13% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span><br><span class="fragHeader">crdbdemo-cockroachdb-2</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.8G   43G  12% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    148G  5.0G  143G   4% /cockroach/cockroach-data</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.8G   43G  12% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span><br><span class="fragHeader">crdbdemo-cockroachdb-3</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.8G   43G  12% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    148G  6.6G  141G   5% /cockroach/cockroach-data</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.8G   43G  12% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span><br><span class="fragHeader">crdbdemo-cockroachdb-4</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.8G   43G  13% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    148G  5.5G  142G   4% /cockroach/cockroach-data</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.8G   43G  13% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span><br><span class="fragHeader">crdbdemo-cockroachdb-5</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay          49G  5.8G   43G  13% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/fs/cgroup</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    148G  5.1G  143G   4% /cockroach/cockroach-data</span><br><span style="padding-left: 1em" class="fragLight">/dev/root        49G  5.8G   43G  13% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            16G     0   16G   0% /sys/firmware</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Non-CRDB Pods</td>
+            <td class="tContent">
+                <pre class="preContent"><span style="padding-left: 1em" class="fragLight">crdbdemo-cockroach-operator-manager-6db8bf849-8m5g7</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Resource Limits</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">cockroachdb-client-secure-79c48dfc9c-bnxv2</span><br><span class="fragLight"> Resource limit (CPU/Memory): </span><span class="fragHeavy">1</span><span class="fragLight"> / </span><span class="fragHeavy">512Mi</span><br><span class="fragLight"> Resource requests (CPU/Memory): </span><span class="fragHeavy">500m</span><span class="fragLight"> / </span><span class="fragHeavy">250Mi</span><br><span class="fragHeader">cockroachdb-full-backup-job-28782720-p2lkj</span><br><span class="fragLight"> None</span><br><span class="fragHeader">cockroachdb-full-backup-job-28784160-v65rv</span><br><span class="fragLight"> None</span><br><span class="fragHeader">cockroachdb-full-backup-job-28785600-mt6jz</span><br><span class="fragLight"> None</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786680-4spr9</span><br><span class="fragLight"> None</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786740-l4xz9</span><br><span class="fragLight"> None</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786800-hvcmv</span><br><span class="fragLight"> None</span><br><span class="fragHeader">crdbdemo-cockroachdb-0</span><br><span class="fragLight"> None</span><br><span class="fragHeader">crdbdemo-cockroachdb-1</span><br><span class="fragLight"> None</span><br><span class="fragHeader">crdbdemo-cockroachdb-2</span><br><span class="fragLight"> None</span><br><span class="fragHeader">crdbdemo-cockroachdb-3</span><br><span class="fragLight"> None</span><br><span class="fragHeader">crdbdemo-cockroachdb-4</span><br><span class="fragLight"> None</span><br><span class="fragHeader">crdbdemo-cockroachdb-5</span><br><span class="fragLight"> None</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">QoS Class</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">cockroachdb-client-secure-79c48dfc9c-bnxv2</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">cockroachdb-full-backup-job-28782720-p2lkj</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">cockroachdb-full-backup-job-28784160-v65rv</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">cockroachdb-full-backup-job-28785600-mt6jz</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786680-4spr9</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786740-l4xz9</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786800-hvcmv</span><br><span class="fragHeavy"> Burstable</span><br><span class="fragHeader">crdbdemo-cockroachdb-0</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">crdbdemo-cockroachdb-1</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">crdbdemo-cockroachdb-2</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">crdbdemo-cockroachdb-3</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">crdbdemo-cockroachdb-4</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">crdbdemo-cockroachdb-5</span><br><span class="fragHeavy"> BestEffort</span></pre>
+            </td>
+            
+            <td class="tContent resultWarning">Inconsistent</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Anti-Affinity</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">cockroachdb-client-secure-79c48dfc9c-bnxv2</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">cockroachdb-full-backup-job-28782720-p2lkj</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">cockroachdb-full-backup-job-28784160-v65rv</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">cockroachdb-full-backup-job-28785600-mt6jz</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786680-4spr9</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786740-l4xz9</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">cockroachdb-incremental-backup-job-28786800-hvcmv</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">crdbdemo-cockroachdb-0</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">crdbdemo-cockroachdb-1</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">crdbdemo-cockroachdb-2</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">crdbdemo-cockroachdb-3</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">crdbdemo-cockroachdb-4</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span><br><span class="fragHeader">crdbdemo-cockroachdb-5</span><br><span class="fragLight"> {
+  "requiredDuringSchedulingIgnoredDuringExecution": [
+    {
+      "labelSelector": {
+        "matchExpressions": [
+          {
+            "key": "app.kubernetes.io/instance",
+            "operator": "In",
+            "values": [
+              "crdbdemo-cockroachdb"
+            ]
+          }
+        ]
+      },
+      "topologyKey": "kubernetes.io/hostname"
+    }
+  ]
+}</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Node Taints</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">ip-10-150-44-67.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-45-112.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-52-44.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-55-9.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-62-44.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-73-110.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-94-105.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span><br><span class="fragHeader">ip-10-150-97-47.us-west-2.compute.internal</span><br><span class="fragLight"> [
+  {
+    "effect": "NoSchedule",
+    "key": "node.kubernetes.io/role",
+    "value": "gravity-cockroachdb"
+  }
+]</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+    </table>
+    <br>
+</body>
+
+</html>

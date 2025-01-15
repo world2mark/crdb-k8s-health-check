@@ -1,0 +1,346 @@
+<html>
+<style>
+    .pageTitle {
+        color: #550077;
+        font-size: 1.5em;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    .tRowsHeader {
+        border-bottom: 1px solid lightgray;
+        background: #eeeeee;
+    }
+
+    .tRows {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .pageHeadersLeft {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em;
+        white-space: nowrap;
+        color: #550077;
+        font-size: 1em;
+    }
+
+    .pageHeadersRight {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.2em 0 0.2em 2em;
+        white-space: nowrap;
+        color: #333333;
+        font-size: 0.8em;
+    }
+
+    .tHeaders {
+        text-align: left;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #550077;
+    }
+
+    .tContent {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+    }
+
+    .resultOK {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #008800;
+    }
+
+    .resultWarning {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        padding: 0.5em;
+        white-space: nowrap;
+        color: #990000;
+    }
+
+    .leftSpacer {
+        background: #eeeeee;
+    }
+
+    .preContent {
+        padding: 0.5em;
+        background: #eeeeee;
+        border-radius: 0.5em;
+    }
+
+    .fragHeader {
+        color: #0000aa;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 0.9em;
+        font-weight: bolder;
+    }
+
+    .fragLight {
+        color: #777777;
+        font-family: monospace;
+        font-size: 0.8em;
+    }
+
+    .fragHeavy {
+        color: #553399;
+        font-family: monospace;
+        font-size: 0.8em;
+        font-weight: bolder;
+    }
+
+    .fragRedHeavy {
+        color: #cc0000;
+        font-family: monospace;
+        font-size: 0.8em;
+        font-weight: bolder;
+    }
+
+    .fragRedLight {
+        color: #cc0000;
+        font-family: monospace;
+        font-size: 0.8em;
+    }
+</style>
+
+<body>
+    <h1 class="pageTitle">Platform Health Check Summary</h1>
+    <table style="border-collapse: collapse; padding: 1em;">
+        
+        <tr>
+            <td class="pageHeadersLeft">RoachDiag Run date</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">Tue  7 Jan 2025 09:00:45 EST</td>
+        </tr>
+        
+        <tr>
+            <td class="pageHeadersLeft">Path to diagnostics files</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">/Users/markzlamal/Documents/PlatformHealthCheck/zone-1</td>
+        </tr>
+        
+        <tr>
+            <td class="pageHeadersLeft">Kubernetes namespace &amp; context</td>
+        </tr>
+        <tr>
+            <td class="pageHeadersRight">zone-1/api-k7h0d1j5l7f9d5h-adve-p3-openshiftapps-com:443/mark</td>
+        </tr>
+        
+    </table>
+    <br>
+    <br>
+    <table style="border-collapse: collapse; padding: 1em;">
+        <tr class="tRowsHeader">
+            <th class="tHeaders">&nbsp;</th>
+            <th class="tHeaders">Category</th>
+            <th class="tHeaders">Observation</th>
+            <th class="tHeaders">Status</th>
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Provider</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeavy">aws:///us-east-1a/i-098091f1247636087</span><span class="fragLight"> ip-10-110-130-94.ec2.internal</span><br><span class="fragHeavy">aws:///us-east-1a/i-0c240eac60ee8caed</span><span class="fragLight"> ip-10-110-135-233.ec2.internal</span><br><span class="fragHeavy">aws:///us-east-1a/i-0eff7a0adc190e7fa</span><span class="fragLight"> ip-10-110-140-221.ec2.internal</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good: AWS</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">OS</td>
+            <td class="tContent">
+                <pre class="preContent">linux (Red Hat Enterprise Linux CoreOS 415.92.202412022228-0 (Plow))</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Kernel Versions</td>
+            <td class="tContent">
+                <pre class="preContent">5.14.0-284.96.1.el9_2.aarch64</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Kubelet Version</td>
+            <td class="tContent">
+                <pre class="preContent">v1.28.15+ff493be</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Docker Version</td>
+            <td class="tContent">
+                <pre class="preContent">cri-o://1.28.11-5.rhaos4.15.git35a2431.el9</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Worker Nodes</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeavy">m7g.xlarge</span><span class="fragLight"> ip-10-110-130-94.ec2.internal</span><br><span class="fragHeavy">m7g.xlarge</span><span class="fragLight"> ip-10-110-135-233.ec2.internal</span><br><span class="fragHeavy">m7g.xlarge</span><span class="fragLight"> ip-10-110-140-221.ec2.internal</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Pods/Workers</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeavy">node-10-110-130-94-0</span><span class="fragLight"> ip-10-110-130-94.ec2.internal</span><br><span class="fragHeavy">node-10-110-135-233-0</span><span class="fragLight"> ip-10-110-135-233.ec2.internal</span><br><span class="fragHeavy">node-10-110-140-221-0</span><span class="fragLight"> ip-10-110-140-221.ec2.internal</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Pod Versions</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">node-10-110-130-94-0</span><br><span class="fragHeavy">cockroachdb/cockroach:v24.2.5</span> <span class="fragLight"> (ip-10-110-130-94.ec2.internal)</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span class="fragHeavy">cockroachdb/cockroach:v24.2.5</span> <span class="fragLight"> (ip-10-110-135-233.ec2.internal)</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span class="fragHeavy">cockroachdb/cockroach:v24.2.5</span> <span class="fragLight"> (ip-10-110-140-221.ec2.internal)</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Capacity</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">node-10-110-130-94-0</span><br><span class="fragHeavy">5Gi</span> <span class="fragLight"> (ip-10-110-130-94.ec2.internal)</span><br><span class="fragHeader">node-10-110-130-94-0</span><br><span class="fragHeavy">5Gi</span> <span class="fragLight"> (ip-10-110-130-94.ec2.internal)</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span class="fragHeavy">5Gi</span> <span class="fragLight"> (ip-10-110-135-233.ec2.internal)</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span class="fragHeavy">5Gi</span> <span class="fragLight"> (ip-10-110-135-233.ec2.internal)</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span class="fragHeavy">5Gi</span> <span class="fragLight"> (ip-10-110-140-221.ec2.internal)</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span class="fragHeavy">5Gi</span> <span class="fragLight"> (ip-10-110-140-221.ec2.internal)</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Storage Class</td>
+            <td class="tContent">
+                <pre class="preContent">gp3-csi</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume Driver</td>
+            <td class="tContent">
+                <pre class="preContent">ebs.csi.aws.com</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Volume FS Type</td>
+            <td class="tContent">
+                <pre class="preContent">ext4</pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Actual Capacity</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">node-10-110-130-94-0</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay         200G   18G  183G   9% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           3.1G  9.8M  3.1G   1% /etc/passwd</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme3n1    4.9G  482M  4.4G  10% /cockroach/crdb_store-0</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme2n1    4.9G  378M  4.5G   8% /cockroach/crdb_store-1</span><br><span style="padding-left: 1em" class="fragLight">/dev/nvme0n1p4  200G   18G  183G   9% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            15G   20K   15G   1% /run/secrets/kubernetes.io/serviceaccount</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /sys/firmware</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay         200G   18G  182G   9% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           3.1G  9.6M  3.1G   1% /etc/passwd</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme3n1    4.9G  390M  4.5G   8% /cockroach/crdb_store-0</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme2n1    4.9G  531M  4.4G  11% /cockroach/crdb_store-1</span><br><span style="padding-left: 1em" class="fragLight">/dev/nvme0n1p4  200G   18G  182G   9% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            15G   20K   15G   1% /run/secrets/kubernetes.io/serviceaccount</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /sys/firmware</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span style="padding-left: 1em" class="fragLight">Filesystem      Size  Used Avail Use% Mounted on</span><br><span style="padding-left: 1em" class="fragLight">overlay         200G   13G  187G   7% /</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            64M     0   64M   0% /dev</span><br><span style="padding-left: 1em" class="fragLight">shm              64M     0   64M   0% /dev/shm</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           3.1G  6.3M  3.1G   1% /etc/passwd</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme2n1    4.9G  533M  4.4G  11% /cockroach/crdb_store-0</span><br><span style="padding-left: 1em" class="fragHeavy">/dev/nvme1n1    4.9G  215M  4.7G   5% /cockroach/crdb_store-1</span><br><span style="padding-left: 1em" class="fragLight">/dev/nvme0n1p4  200G   13G  187G   7% /etc/hosts</span><br><span style="padding-left: 1em" class="fragLight">tmpfs            15G   20K   15G   1% /run/secrets/kubernetes.io/serviceaccount</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /proc/acpi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /proc/scsi</span><br><span style="padding-left: 1em" class="fragLight">tmpfs           7.7G     0  7.7G   0% /sys/firmware</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Non-CRDB Pods</td>
+            <td class="tContent">
+                <pre class="preContent"><span style="padding-left: 1em" class="fragLight">alertmanager-main-0</span><br><span style="padding-left: 1em" class="fragLight">alertmanager-main-1</span><br><span style="padding-left: 1em" class="fragLight">aws-ebs-csi-driver-node-8x86x</span><br><span style="padding-left: 1em" class="fragLight">aws-ebs-csi-driver-node-fnxkr</span><br><span style="padding-left: 1em" class="fragLight">aws-ebs-csi-driver-node-tnddq</span><br><span style="padding-left: 1em" class="fragLight">cluster-monitoring-operator-74ccd78494-mrwbx</span><br><span style="padding-left: 1em" class="fragLight">cluster-samples-operator-58f564874c-fgqq5</span><br><span style="padding-left: 1em" class="fragLight">console-58b488c5cb-cdvqc</span><br><span style="padding-left: 1em" class="fragLight">console-58b488c5cb-gcptm</span><br><span style="padding-left: 1em" class="fragLight">console-operator-79b48d44c5-7cc97</span><br><span style="padding-left: 1em" class="fragLight">deployment-validation-operator-catalog-v6qpg</span><br><span style="padding-left: 1em" class="fragLight">dns-default-72tw5</span><br><span style="padding-left: 1em" class="fragLight">dns-default-9g49v</span><br><span style="padding-left: 1em" class="fragLight">dns-default-c2ql7</span><br><span style="padding-left: 1em" class="fragLight">downloads-54bbd9c856-74whw</span><br><span style="padding-left: 1em" class="fragLight">downloads-54bbd9c856-k6khv</span><br><span style="padding-left: 1em" class="fragLight">image-pruner-28935360-5m26f</span><br><span style="padding-left: 1em" class="fragLight">image-pruner-28936800-j8xgg</span><br><span style="padding-left: 1em" class="fragLight">image-registry-85dfc544b9-ljqz8</span><br><span style="padding-left: 1em" class="fragLight">image-registry-85dfc544b9-tg6gx</span><br><span style="padding-left: 1em" class="fragLight">ingress-canary-cszlr</span><br><span style="padding-left: 1em" class="fragLight">ingress-canary-wkgbf</span><br><span style="padding-left: 1em" class="fragLight">ingress-canary-xrxfl</span><br><span style="padding-left: 1em" class="fragLight">insights-operator-5b86f4b8bb-vcqh6</span><br><span style="padding-left: 1em" class="fragLight">konnectivity-agent-45x5b</span><br><span style="padding-left: 1em" class="fragLight">konnectivity-agent-cth78</span><br><span style="padding-left: 1em" class="fragLight">konnectivity-agent-n45ks</span><br><span style="padding-left: 1em" class="fragLight">kube-apiserver-proxy-ip-10-110-130-94.ec2.internal</span><br><span style="padding-left: 1em" class="fragLight">kube-apiserver-proxy-ip-10-110-135-233.ec2.internal</span><br><span style="padding-left: 1em" class="fragLight">kube-apiserver-proxy-ip-10-110-140-221.ec2.internal</span><br><span style="padding-left: 1em" class="fragLight">kube-rbac-proxy-crio-ip-10-110-130-94.ec2.internal</span><br><span style="padding-left: 1em" class="fragLight">kube-rbac-proxy-crio-ip-10-110-135-233.ec2.internal</span><br><span style="padding-left: 1em" class="fragLight">kube-rbac-proxy-crio-ip-10-110-140-221.ec2.internal</span><br><span style="padding-left: 1em" class="fragLight">kube-state-metrics-fb6fdd475-wdwvq</span><br><span style="padding-left: 1em" class="fragLight">kube-storage-version-migrator-operator-7d857c5bd7-kqdh4</span><br><span style="padding-left: 1em" class="fragLight">migrator-d664c4984-jfq6d</span><br><span style="padding-left: 1em" class="fragLight">monitoring-plugin-8477df5cf6-8vw9b</span><br><span style="padding-left: 1em" class="fragLight">monitoring-plugin-8477df5cf6-mlsvs</span><br><span style="padding-left: 1em" class="fragLight">multus-8882g</span><br><span style="padding-left: 1em" class="fragLight">multus-additional-cni-plugins-jwvrf</span><br><span style="padding-left: 1em" class="fragLight">multus-additional-cni-plugins-ljrdg</span><br><span style="padding-left: 1em" class="fragLight">multus-additional-cni-plugins-rdpp5</span><br><span style="padding-left: 1em" class="fragLight">multus-jzntz</span><br><span style="padding-left: 1em" class="fragLight">multus-kpr7c</span><br><span style="padding-left: 1em" class="fragLight">network-check-source-56b99845c-2cmgq</span><br><span style="padding-left: 1em" class="fragLight">network-check-target-n4lhf</span><br><span style="padding-left: 1em" class="fragLight">network-check-target-nrs9g</span><br><span style="padding-left: 1em" class="fragLight">network-check-target-p2t4n</span><br><span style="padding-left: 1em" class="fragLight">network-metrics-daemon-df2fq</span><br><span style="padding-left: 1em" class="fragLight">network-metrics-daemon-fhsvn</span><br><span style="padding-left: 1em" class="fragLight">network-metrics-daemon-h7c6h</span><br><span style="padding-left: 1em" class="fragLight">node-ca-5jc4r</span><br><span style="padding-left: 1em" class="fragLight">node-ca-b75tt</span><br><span style="padding-left: 1em" class="fragLight">node-ca-lgfzp</span><br><span style="padding-left: 1em" class="fragLight">node-exporter-2zb92</span><br><span style="padding-left: 1em" class="fragLight">node-exporter-6mdqz</span><br><span style="padding-left: 1em" class="fragLight">node-exporter-hs4s9</span><br><span style="padding-left: 1em" class="fragLight">node-resolver-9f758</span><br><span style="padding-left: 1em" class="fragLight">node-resolver-bkrc8</span><br><span style="padding-left: 1em" class="fragLight">node-resolver-jcjzd</span><br><span style="padding-left: 1em" class="fragLight">openshift-state-metrics-6d74b98fd5-kvnzl</span><br><span style="padding-left: 1em" class="fragLight">osd-delete-backplane-script-resources-28936842-z2ghd</span><br><span style="padding-left: 1em" class="fragLight">osd-delete-backplane-serviceaccounts-28937620-v4sld</span><br><span style="padding-left: 1em" class="fragLight">osd-delete-backplane-serviceaccounts-28937630-r9mkn</span><br><span style="padding-left: 1em" class="fragLight">osd-delete-backplane-serviceaccounts-28937640-pq85s</span><br><span style="padding-left: 1em" class="fragLight">ovnkube-node-8v9d6</span><br><span style="padding-left: 1em" class="fragLight">ovnkube-node-ftljv</span><br><span style="padding-left: 1em" class="fragLight">ovnkube-node-ggjpq</span><br><span style="padding-left: 1em" class="fragLight">prometheus-adapter-6fd575f6f9-df28b</span><br><span style="padding-left: 1em" class="fragLight">prometheus-adapter-6fd575f6f9-rnrz6</span><br><span style="padding-left: 1em" class="fragLight">prometheus-k8s-0</span><br><span style="padding-left: 1em" class="fragLight">prometheus-k8s-1</span><br><span style="padding-left: 1em" class="fragLight">prometheus-operator-5bb8c655c5-l9tqd</span><br><span style="padding-left: 1em" class="fragLight">prometheus-operator-admission-webhook-7447c84cbd-4w68w</span><br><span style="padding-left: 1em" class="fragLight">prometheus-operator-admission-webhook-7447c84cbd-llztj</span><br><span style="padding-left: 1em" class="fragLight">router-default-54ccbf68d4-66xwk</span><br><span style="padding-left: 1em" class="fragLight">router-default-54ccbf68d4-7gzvr</span><br><span style="padding-left: 1em" class="fragLight">service-ca-795b5d6-tbm6w</span><br><span style="padding-left: 1em" class="fragLight">service-ca-operator-585bb798b4-ct9x4</span><br><span style="padding-left: 1em" class="fragLight">telemeter-client-fbd589464-vs2kd</span><br><span style="padding-left: 1em" class="fragLight">thanos-querier-6d7f79b96-dvf49</span><br><span style="padding-left: 1em" class="fragLight">thanos-querier-6d7f79b96-t8qdf</span><br><span style="padding-left: 1em" class="fragLight">tuned-98hwj</span><br><span style="padding-left: 1em" class="fragLight">tuned-jrqbp</span><br><span style="padding-left: 1em" class="fragLight">tuned-q7fxl</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">CRDB Resource Limits</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">node-10-110-130-94-0</span><br><span class="fragLight"> None</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span class="fragLight"> None</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span class="fragLight"> None</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">QoS Class</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">node-10-110-130-94-0</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span class="fragHeavy"> BestEffort</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span class="fragHeavy"> BestEffort</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Anti-Affinity</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">node-10-110-130-94-0</span><br><span class="fragLight"> None</span><br><span class="fragHeader">node-10-110-135-233-0</span><br><span class="fragLight"> None</span><br><span class="fragHeader">node-10-110-140-221-0</span><br><span class="fragLight"> None</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+        <tr class="tRows">
+            <td class="leftSpacer"></td> 
+            <td class="tContent">Node Taints</td>
+            <td class="tContent">
+                <pre class="preContent"><span class="fragHeader">ip-10-110-130-94.ec2.internal</span><br><span class="fragLight"> None</span><br><span class="fragHeader">ip-10-110-135-233.ec2.internal</span><br><span class="fragLight"> None</span><br><span class="fragHeader">ip-10-110-140-221.ec2.internal</span><br><span class="fragLight"> None</span></pre>
+            </td>
+            
+            <td class="tContent resultOK">Good</td>
+            
+        </tr>
+        
+    </table>
+    <br>
+</body>
+
+</html>

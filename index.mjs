@@ -660,10 +660,10 @@ function ValidateNodeTaints() {
         Comments: 'Good',
         Value: []
     };
-    
+
     let taintList;
 
-    for(const workerNode of WorkerNodesRaw) {
+    for (const workerNode of WorkerNodesRaw) {
         const HTML = [];
 
         HTML.push(`<span class=\"fragHeader\">${workerNode.metadata.name}</span>`);
@@ -693,6 +693,117 @@ ObjectList.push({
 
 
 
+function TerminationGracePeriod() {
+    const resultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+
+    let TGP;
+
+    for (const crdbPod of AllPods.CRDB) {
+        let incomingTGP = crdbPod.spec.terminationGracePeriodSeconds;
+        if (incomingTGP || TGP === 0) {
+            if (!TGP && TGP !== 0) {
+                TGP = incomingTGP;
+            };
+            if (TGP !== incomingTGP) {
+                resultObj.Warning = true;
+                resultObj.Comments = 'Inconsistent'
+            };
+        } else {
+            incomingTGP = 'Not specified';
+        };
+
+        const HTML = [];
+        HTML.push(`<span class=\"fragHeader\">${crdbPod.metadata.name}</span>`);
+        HTML.push(`<span class=\"fragHeavy\"> ${incomingTGP}</span>`);
+        resultObj.Value.push(HTML.join('<br>'));
+    };
+
+    return resultObj;
+};
+
+ObjectList.push({
+    Header: 'Termination Grace Period',
+    Results: TerminationGracePeriod()
+});
+
+
+
+
+
+
+
+const StartUpCommands = AllPods.CRDB.map(CRDBPod => {
+    const containerStartUp = {
+        PodName: CRDBPod.metadata.name,
+        WorkerNode: CRDBPod.spec.nodeName,
+        Startup: ['n/a (not an exec command)'],
+        PleaseTest: false
+    };
+    let theParamsArray = CRDBPod.spec.containers[0].command;
+    if (!theParamsArray) {
+        theParamsArray = CRDBPod.spec.containers[0].args;
+    } else if (CRDBPod.spec.containers[0].args) {
+        throw new Error(`${containerStartUp.PodName}/${containerStartUp.WorkerNode}: Why is there both command and args in the pod definition?`);
+    };
+
+    const actualStartCommand = theParamsArray.find(commandFrag => commandFrag.startsWith('exec '));
+
+    if (actualStartCommand) {
+        containerStartUp.Startup = actualStartCommand.split(' ');
+        containerStartUp.PleaseTest = true;
+    };
+
+    return containerStartUp;
+});
+
+function ValidateStartup() {
+    const resultObj = {
+        Comments: 'Good',
+        Value: []
+    };
+
+    function filteredStartCommand(startArr) {
+        return startArr.map(param => {
+            if (param.startsWith('--advertise-addr')) {
+                return '';
+            } else if (param.startsWith('--locality-advertise')) {
+                return '';
+            } else {
+                return param;
+            }
+        });
+    };
+
+    let startUpCommands;
+
+    for (const startupInfo of StartUpCommands) {
+        const HTML = [];
+        HTML.push(`<span class=\"fragHeader\">${startupInfo.PodName}</span><span class=\"fragHeavy\"> (${startupInfo.WorkerNode})</span>`);
+        if (startupInfo.PleaseTest && !startUpCommands) {
+            startUpCommands = filteredStartCommand(startupInfo.Startup);
+        };
+        if (startupInfo.PleaseTest && !DeepEqual(filteredStartCommand(startupInfo.Startup), startUpCommands)) {
+            resultObj.Warning = true;
+            resultObj.Comments = 'Inconsistent';
+        };
+        HTML.push(`<span class=\"fragLight\">${startupInfo.Startup.map(sc => ` ${sc}`).join('<br>')}</span>`);
+        resultObj.Value.push(HTML.join('<br>'));
+    };
+
+    return resultObj;
+};
+
+ObjectList.push({
+    Header: 'Startup parameters',
+    Results: ValidateStartup()
+});
+
+
+
+
 
 
 const HeaderList = [];
@@ -711,9 +822,10 @@ HeaderList.push({
 });
 
 const k8sContextHeaderIndex = TXTFileLines.findIndex(item => item.includes(':::::  kubectl config current-context'));
+const NS_CONTEXT_STRING = TXTFileLines[k8sContextHeaderIndex + 2];
 HeaderList.push({
     Key: 'Kubernetes namespace &amp; context',
-    Value: TXTFileLines[k8sContextHeaderIndex + 2]
+    Value: NS_CONTEXT_STRING
 });
 
 
@@ -723,6 +835,20 @@ const resultHTML = EJS.render(EJSString, {
     ObjectList
 });
 
-FS.writeFileSync(PATH.join(import.meta.dirname, 'results.html'), resultHTML);
+const NSContextParts = NS_CONTEXT_STRING.split('/');
+const ResultFileName = [];
+
+if (process.env.ALWAYS_RESULTS_HTML === 'yes') {
+    ResultFileName.push('results.html');
+} else {
+    ResultFileName.push(NSContextParts[0]);
+    if (NSContextParts.length > 1) {
+        ResultFileName.push(NSContextParts[NSContextParts.length - 1]);
+    };
+    ResultFileName.push(Date.now());
+    ResultFileName.push('html')
+};
+
+FS.writeFileSync(PATH.join(import.meta.dirname, ResultFileName.join('.')), resultHTML);
 
 console.log('App completed');
