@@ -174,6 +174,9 @@ function CaptureAllPods(pData) {
 
     const podList = CaptureDataGeneric(pData, 'pod*.yaml', []);
     for (const thePod of podList) {
+        if (!thePod) {
+            continue;
+        };
         for (const myContainer of thePod.spec.containers) {
             if (myContainer.image.includes('cockroachdb/cockroach:')) {
                 if (thePod.spec.containers.length !== 1) {
